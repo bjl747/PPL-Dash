@@ -30,6 +30,7 @@ jobs:
           import requests
           import json
           import os
+          from datetime import datetime
 
           # 1. SETUP
           api_key = os.environ.get('API_KEY')
@@ -37,6 +38,7 @@ jobs:
               print('Error: API Key is missing! Check GitHub Secrets.')
               exit(1)
               
+          # Note: The Odds API 'ncaaf' endpoint is primarily FBS.
           sports = ['americanfootball_nfl', 'americanfootball_ncaaf']
           clean_games = []
 
@@ -50,19 +52,28 @@ jobs:
                   
                   # 3. TRANSLATE DATA
                   for game in data:
-                      spread_val = 'N/A'
+                      spread_home = 'N/A'
+                      spread_away = 'N/A'
                       total_val = 'N/A'
 
                       bookmakers = game.get('bookmakers', [])
                       if bookmakers:
+                          # Prefer DraftKings, fallback to first available
                           main_bookie = next((b for b in bookmakers if b['key'] == 'draftkings'), bookmakers[0])
                           
                           # Spread
                           spread_market = next((m for m in main_bookie['markets'] if m['key'] == 'spreads'), None)
                           if spread_market:
-                              outcome = next((o for o in spread_market['outcomes'] if o['name'] == game['home_team']), spread_market['outcomes'][0])
-                              point = outcome.get('point')
-                              spread_val = f'{point}' if point else 'N/A'
+                              for outcome in spread_market['outcomes']:
+                                  point = outcome.get('point')
+                                  price = outcome.get('price')
+                                  # Format +/-
+                                  FormattedPoint = f'+{point}' if point > 0 else f'{point}'
+                                  
+                                  if outcome['name'] == game['home_team']:
+                                      spread_home = FormattedPoint
+                                  else:
+                                      spread_away = FormattedPoint
 
                           # Over/Under
                           total_market = next((m for m in main_bookie['markets'] if m['key'] == 'totals'), None)
@@ -71,18 +82,24 @@ jobs:
                               total_val = str(over_outcome.get('point', 'N/A'))
 
                       clean_game = {
-                          'date': game['commence_time'],
+                          'raw_date': game['commence_time'], # Keep raw for sorting
+                          'game_info': game.get('notes', ''), # Grabs info like 'Fiesta Bowl' if available
                           'home_team': game['home_team'],
                           'away_team': game['away_team'],
-                          'spread': spread_val,
-                          'over_under': total_val
+                          'spread_home': spread_home,
+                          'spread_away': spread_away,
+                          'over_under': total_val,
+                          'league': 'NFL' if 'nfl' in sport else 'NCAAF'
                       }
                       clean_games.append(clean_game)
 
               except Exception as e:
                   print(f'Error fetching {sport}: {e}')
 
-          # 4. SAVE FILE
+          # 4. SORT BY DATE THEN SAVE
+          # Sort games by time so they appear in order
+          clean_games.sort(key=lambda x: x['raw_date'])
+          
           with open('odds.json', 'w') as f:
               json.dump(clean_games, f, indent=2)
           "
@@ -92,4 +109,4 @@ jobs:
           git config --global user.name 'Odds-Bot'
           git config --global user.email 'bot@noreply.github.com'
           git add odds.json
-          git diff --quiet && git diff --staged --quiet || (git commit -m 'Update betting lines' && git push)
+          git diff --quiet && git diff --staged --quiet || (git commit -m 'Update betting lines data structure' && git push)
