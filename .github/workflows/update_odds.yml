@@ -2,9 +2,8 @@ name: Update Betting Lines
 
 on:
   schedule:
-    # Runs every hour
-    - cron: '0 * * * *'
-  workflow_dispatch: # Allows you to run this manually to test it
+    - cron: '0 * * * *' # Runs every hour
+  workflow_dispatch: # Allows manual button click
 
 jobs:
   update-odds:
@@ -30,50 +29,44 @@ jobs:
           import os
 
           # 1. SETUP
-          api_key = os.environ['API_KEY']
-          # We fetch NFL and NCAA Football
+          api_key = os.environ.get('API_KEY')
+          if not api_key:
+              print('Error: API Key is missing! Check GitHub Secrets.')
+              exit(1)
+              
           sports = ['americanfootball_nfl', 'americanfootball_ncaaf']
           clean_games = []
 
           # 2. FETCH DATA
           for sport in sports:
-              # Get spreads and totals (over/under)
               url = f'https://api.the-odds-api.com/v4/sports/{sport}/odds/?regions=us&markets=spreads,totals&oddsFormat=american&apiKey={api_key}'
               try:
                   response = requests.get(url)
                   response.raise_for_status()
                   data = response.json()
                   
-                  # 3. TRANSLATE DATA TO MATCH CANVAS FORMAT
+                  # 3. TRANSLATE DATA
                   for game in data:
-                      # Default values if lines aren't out yet
                       spread_val = 'N/A'
                       total_val = 'N/A'
 
-                      # Try to find a bookmaker with lines (we prioritize DraftKings, then fall back to the first one)
                       bookmakers = game.get('bookmakers', [])
                       if bookmakers:
-                          # Look for a main bookie, or just take the first one available
                           main_bookie = next((b for b in bookmakers if b['key'] == 'draftkings'), bookmakers[0])
                           
-                          # Extract Spread
+                          # Spread
                           spread_market = next((m for m in main_bookie['markets'] if m['key'] == 'spreads'), None)
                           if spread_market:
-                              # Find the outcome for the Home team to match the logic
                               outcome = next((o for o in spread_market['outcomes'] if o['name'] == game['home_team']), spread_market['outcomes'][0])
-                              # Format: '-3.5' or '+7.0'
-                              price = outcome.get('price')
                               point = outcome.get('point')
                               spread_val = f'{point}' if point else 'N/A'
 
-                          # Extract Over/Under
+                          # Over/Under
                           total_market = next((m for m in main_bookie['markets'] if m['key'] == 'totals'), None)
                           if total_market:
-                              # Usually just grab the 'Over' point
                               over_outcome = next((o for o in total_market['outcomes'] if o['name'] == 'Over'), total_market['outcomes'][0])
                               total_val = str(over_outcome.get('point', 'N/A'))
 
-                      # Create the simple object your site expects
                       clean_game = {
                           'date': game['commence_time'],
                           'home_team': game['home_team'],
@@ -96,5 +89,4 @@ jobs:
           git config --global user.name 'Odds-Bot'
           git config --global user.email 'bot@noreply.github.com'
           git add odds.json
-          # Only commit if the file has changed to keep history clean
           git diff --quiet && git diff --staged --quiet || (git commit -m 'Update betting lines' && git push)
