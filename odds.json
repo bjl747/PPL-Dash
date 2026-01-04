@@ -4,146 +4,188 @@
     "home_team": "Atlanta Falcons",
     "away_team": "New Orleans Saints",
     "spread": "-3.5",
-    "over_under": "43.5"
+    "over_under": "43.5",
+    "info": "",
+    "league": "NFL"
   },
   {
     "date": "2026-01-04T18:00:00Z",
     "home_team": "Cincinnati Bengals",
     "away_team": "Cleveland Browns",
     "spread": "-7.5",
-    "over_under": "45.5"
+    "over_under": "45.5",
+    "info": "",
+    "league": "NFL"
   },
   {
     "date": "2026-01-04T18:00:00Z",
     "home_team": "New York Giants",
     "away_team": "Dallas Cowboys",
     "spread": "3.0",
-    "over_under": "49.5"
+    "over_under": "49.5",
+    "info": "",
+    "league": "NFL"
   },
   {
     "date": "2026-01-04T18:00:00Z",
     "home_team": "Minnesota Vikings",
     "away_team": "Green Bay Packers",
     "spread": "-10.5",
-    "over_under": "37.5"
+    "over_under": "37.5",
+    "info": "",
+    "league": "NFL"
   },
   {
     "date": "2026-01-04T18:00:00Z",
     "home_team": "Houston Texans",
     "away_team": "Indianapolis Colts",
     "spread": "-10.5",
-    "over_under": "38.5"
+    "over_under": "38.5",
+    "info": "",
+    "league": "NFL"
   },
   {
     "date": "2026-01-04T18:00:00Z",
     "home_team": "Jacksonville Jaguars",
     "away_team": "Tennessee Titans",
     "spread": "-13.5",
-    "over_under": "47.5"
+    "over_under": "47.5",
+    "info": "",
+    "league": "NFL"
   },
   {
     "date": "2026-01-04T21:25:00Z",
     "home_team": "Los Angeles Rams",
     "away_team": "Arizona Cardinals",
     "spread": "-13.5",
-    "over_under": "47.5"
+    "over_under": "47.5",
+    "info": "",
+    "league": "NFL"
   },
   {
     "date": "2026-01-04T21:25:00Z",
     "home_team": "Buffalo Bills",
     "away_team": "New York Jets",
     "spread": "-8.5",
-    "over_under": "37.5"
+    "over_under": "37.5",
+    "info": "",
+    "league": "NFL"
   },
   {
     "date": "2026-01-04T21:25:00Z",
     "home_team": "Chicago Bears",
     "away_team": "Detroit Lions",
     "spread": "-3.5",
-    "over_under": "50.5"
+    "over_under": "50.5",
+    "info": "",
+    "league": "NFL"
   },
   {
     "date": "2026-01-04T21:25:00Z",
     "home_team": "Denver Broncos",
     "away_team": "Los Angeles Chargers",
     "spread": "-14.0",
-    "over_under": "37.5"
+    "over_under": "37.5",
+    "info": "",
+    "league": "NFL"
   },
   {
     "date": "2026-01-04T21:25:00Z",
     "home_team": "Las Vegas Raiders",
     "away_team": "Kansas City Chiefs",
     "spread": "4.5",
-    "over_under": "36.5"
+    "over_under": "36.5",
+    "info": "",
+    "league": "NFL"
   },
   {
     "date": "2026-01-04T21:25:00Z",
     "home_team": "New England Patriots",
     "away_team": "Miami Dolphins",
     "spread": "-11.5",
-    "over_under": "45.5"
+    "over_under": "45.5",
+    "info": "",
+    "league": "NFL"
   },
   {
     "date": "2026-01-04T21:25:00Z",
     "home_team": "Philadelphia Eagles",
     "away_team": "Washington Commanders",
     "spread": "-4.5",
-    "over_under": "38.5"
+    "over_under": "38.5",
+    "info": "",
+    "league": "NFL"
   },
   {
     "date": "2026-01-05T01:20:00Z",
     "home_team": "Pittsburgh Steelers",
     "away_team": "Baltimore Ravens",
     "spread": "3.5",
-    "over_under": "40.5"
+    "over_under": "40.5",
+    "info": "",
+    "league": "NFL"
   },
   {
     "date": "2026-01-06T00:30:00Z",
     "home_team": "Montana State Bobcats",
     "away_team": "Illinois State Redbirds",
     "spread": "-10.5",
-    "over_under": "57.5"
+    "over_under": "57.5",
+    "info": "",
+    "league": "NCAAF"
   },
   {
     "date": "2026-01-09T00:30:00Z",
     "home_team": "Ole Miss Rebels",
     "away_team": "Miami Hurricanes",
     "spread": "3.5",
-    "over_under": "51.5"
+    "over_under": "51.5",
+    "info": "",
+    "league": "NCAAF"
   },
   {
     "date": "2026-01-10T00:30:00Z",
     "home_team": "Indiana Hoosiers",
     "away_team": "Oregon Ducks",
     "spread": "-4.0",
-    "over_under": "46.5"
+    "over_under": "46.5",
+    "info": "",
+    "league": "NCAAF"
   },
   {
     "date": "2026-01-20T00:30:00Z",
     "home_team": "Indiana Hoosiers",
     "away_team": "Miami Hurricanes",
     "spread": "-5.5",
-    "over_under": "44.5"
+    "over_under": "44.5",
+    "info": "",
+    "league": "NCAAF"
   },
   {
     "date": "2026-01-20T00:30:00Z",
     "home_team": "Indiana Hoosiers",
     "away_team": "Ole Miss Rebels",
     "spread": "-7.5",
-    "over_under": "49.5"
+    "over_under": "49.5",
+    "info": "",
+    "league": "NCAAF"
   },
   {
     "date": "2026-01-20T00:30:00Z",
     "home_team": "Oregon Ducks",
     "away_team": "Miami Hurricanes",
     "spread": "-2.5",
-    "over_under": "46.5"
+    "over_under": "46.5",
+    "info": "",
+    "league": "NCAAF"
   },
   {
     "date": "2026-01-20T00:30:00Z",
     "home_team": "Oregon Ducks",
     "away_team": "Ole Miss Rebels",
     "spread": "-3.5",
-    "over_under": "53.5"
+    "over_under": "53.5",
+    "info": "",
+    "league": "NCAAF"
   }
 ]
