@@ -19,6 +19,9 @@ jobs:
         with:
           python-version: '3.x'
 
+      - name: Install Dependencies
+        run: pip install requests
+
       - name: Fetch and Clean Odds
         env:
           API_KEY: ${{ secrets.ODDS_API_KEY }}
